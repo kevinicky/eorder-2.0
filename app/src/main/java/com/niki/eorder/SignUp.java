@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
     Button btnSignIn;
-    private EditText etFullName, etEmail, etPassword;
+    private EditText etFullName, etEmail, etPassword, etPhone;
     ImageView ivSignUp;
     private FirebaseAuth firebaseAuth;
     private RelativeLayout relativeLayout;
@@ -47,6 +47,7 @@ public class SignUp extends AppCompatActivity {
         etFullName = findViewById(R.id.et_full_name);
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
+        etPhone = findViewById(R.id.et_phone);
         btnSignIn = findViewById(R.id.btn_already_have_sign_in);
         ivSignUp = findViewById(R.id.iv_sign_up);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -64,6 +65,7 @@ public class SignUp extends AppCompatActivity {
                 final String fullName = etFullName.getText().toString();
                 final String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
+                final String phone = etPhone.getText().toString();
 
                 if (fullName.equals("") || email.equals("") || password.equals("")){
                     Toast.makeText(SignUp.this, "All forms must be filled!", Toast.LENGTH_SHORT).show();
@@ -85,6 +87,7 @@ public class SignUp extends AppCompatActivity {
                                 docData.put("email", email);
                                 docData.put("name", fullName);
                                 docData.put("eBalance", 0);
+                                docData.put("phone", phone);
 
                                 String uid = firebaseAuth.getUid();
 
