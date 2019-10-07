@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentReceipt"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Reservation ID is"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:id="@+id/tv_reservation_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        android:layout_gravity="center"
+        android:text="0453"/>
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Seat Number is"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:id="@+id/tv_seat_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        android:layout_gravity="center"
+        android:text="12"/>
+    <Button
+        android:id="@+id/btn_back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Back to home"
+        android:textColor="@color/colorWhite"
+        android:padding="10dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorAccent"/>
+</LinearLayout>

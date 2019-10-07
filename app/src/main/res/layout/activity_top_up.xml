@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TopUp"
+    android:background="@drawable/background">
+
+    <EditText
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:id="@+id/et_top_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="Input your ebalance"
+        android:inputType="number"
+        android:textAlignment="center"/>
+
+    <Button
+        android:layout_below="@id/et_top_up"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/btn_top_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="TOP UP"/>
+
+</RelativeLayout>

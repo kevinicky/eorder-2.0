@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "229335487746",
+    "firebase_url": "https://eorder-7c4f3.firebaseio.com",
+    "project_id": "eorder-7c4f3",
+    "storage_bucket": "eorder-7c4f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229335487746:android:996347d3dbe4e144",
+        "android_client_info": {
+          "package_name": "com.niki.eorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229335487746-q7vrd6g4fbrga0o8fpnfq1teviksp984.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.niki.eorder",
+            "certificate_hash": "d67b0da9626cb53875250c7c605a217dbe6ec0e5"
+          }
+        },
+        {
+          "client_id": "229335487746-o0im7v62m4fa7nhi58p0sod1blo186fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKUzjDLmsxfRxr13LeM5NHu3HPBE5I9gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229335487746-o0im7v62m4fa7nhi58p0sod1blo186fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">eOrder</string>
+    <string name="loading_empty">Loading…</string>
+    <string name="loading_login">Logging in…</string>
+</resources>
