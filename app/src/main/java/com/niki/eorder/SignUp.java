@@ -87,7 +87,8 @@ public class SignUp extends AppCompatActivity {
                                 Map<String, Object> docData = new HashMap<>();
                                 docData.put("email", email);
                                 docData.put("name", fullName);
-                                docData.put("eBalance", 0);
+                                docData.put("gopay", 0);
+                                docData.put("ovo", 0);
                                 docData.put("phone", phone);
 
                                 String uid = firebaseAuth.getUid();

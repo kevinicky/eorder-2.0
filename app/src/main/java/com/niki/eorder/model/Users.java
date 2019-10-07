@@ -1,16 +1,25 @@
 package com.niki.eorder.model;
 
 public class Users {
-    private long eBalance;
+    private long gopay;
+    private long ovo;
     private String email;
     private String name;
 
-    public long geteBalance() {
-        return eBalance;
+    public long getOvo() {
+        return ovo;
     }
 
-    public void seteBalance(long eBalance) {
-        this.eBalance = eBalance;
+    public void setOvo(long ovo) {
+        this.ovo = ovo;
+    }
+
+    public long getGopay() {
+        return gopay;
+    }
+
+    public void setGopay(long gopay) {
+        this.gopay = gopay;
     }
 
     public String getEmail() {

@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -19,53 +19,49 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TopUp extends AppCompatActivity {
-    private EditText etTopUp;
-    Button btnTopUp;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private String topUpValue = "";
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private TextView tvGopay, tvOvo;
+    private Long gopay, ovo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Top Up");
+        actionBar.setTitle("My Wallet");
+    }
 
-        etTopUp = findViewById(R.id.et_top_up);
-        btnTopUp = findViewById(R.id.btn_top_up);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (firebaseAuth.getCurrentUser() != null){
+            DocumentReference ref = db.collection("users").document(firebaseAuth.getUid());
+            tvGopay = findViewById(R.id.tv_gopay_balance);
+            tvOvo = findViewById(R.id.tv_ovo_balance);
 
-        btnTopUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpValue = etTopUp.getText().toString();
+            ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    gopay = documentSnapshot.getLong("gopay");
+                    ovo = documentSnapshot.getLong("ovo");
 
-                Log.d("LOGGER", "Top Up Value : " + topUpValue);
-                if (!topUpValue.isEmpty()){
-                    final Integer ebalance = Integer.valueOf(topUpValue);
-                    final DocumentReference ref = db.collection("users").document(firebaseAuth.getUid());
-                    ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Long eBalance = documentSnapshot.getLong("eBalance");
-
-                            ref.update("eBalance", eBalance + ebalance);
-
-                            Toast.makeText(TopUp.this, "Success TopUp eBalance :)", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                            startActivity(intent);
-                        }
-                    });
-
+                    // set eBalance to IDR format
+                    Utility utility = new Utility();
+                    tvGopay.setText(utility.toIDR(gopay));
+                    tvOvo.setText(utility.toIDR(ovo));
                 }
-                else{
-                    Toast.makeText(TopUp.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(TopUp.this, "Error getting data, please try again", Toast.LENGTH_SHORT).show();
+                    firebaseAuth.signOut();
+                    Intent intent = new Intent(getApplicationContext(), Home.class);
+                    startActivity(intent);
+                    finish();
                 }
-
-
-            }
-        });
+            });
+        }
     }
 
     @Override

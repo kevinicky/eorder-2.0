@@ -22,10 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Dashboard extends AppCompatActivity {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private TextView tvUserEmail, tvUserName, tvUserEbalance;
+    private TextView tvUserEmail, tvUserName;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String name, email;
-    private long eBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,26 +95,19 @@ public class Dashboard extends AppCompatActivity {
             DocumentReference ref = db.collection("users").document(firebaseAuth.getUid());
             tvUserEmail = findViewById(R.id.tv_user_email);
             tvUserName = findViewById(R.id.tv_user_name);
-            tvUserEbalance = findViewById(R.id.tv_user_ebalance);
 
             ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Log.d("LOGGER", "name " + documentSnapshot.getString("name"));
                     Log.d("LOGGER", "email " + documentSnapshot.getString("email"));
-                    Log.d("LOGGER", "eBalance " + documentSnapshot.getLong("eBalance"));
 
                     name = documentSnapshot.getString("name");
                     email = documentSnapshot.getString("email");
-                    eBalance = documentSnapshot.getLong("eBalance");
-
                     // set eBalance to IDR format
-
-                    Utility util = new Utility();
 
                     tvUserEmail.setText(email);
                     tvUserName.setText("Welcome back, " + name);
-                    tvUserEbalance.setText("Your eBalance : " + util.toIDR(eBalance));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

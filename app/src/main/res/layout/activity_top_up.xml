@@ -1,33 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".TopUp"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:orientation="vertical">
 
-    <EditText
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
-        android:id="@+id/et_top_up"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:hint="Input your ebalance"
-        android:inputType="number"
-        android:textAlignment="center"/>
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
-    <Button
-        android:layout_below="@id/et_top_up"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:textColor="@color/colorWhite"
-        android:id="@+id/btn_top_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="TOP UP"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gopay_logo">
+            </ImageView>
+            <TextView
+                android:id="@+id/tv_gopay_balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Rp. 2.000.000"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:paddingTop="40dp"
+                android:paddingRight="25dp"
+                android:textSize="20sp">
 
-</RelativeLayout>
+            </TextView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ovo_logo">
+            </ImageView>
+            <TextView
+                android:id="@+id/tv_ovo_balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Rp. 2.000.000"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:paddingTop="40dp"
+                android:paddingRight="25dp"
+                android:textSize="20sp">
+
+            </TextView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
