@@ -2,14 +2,17 @@ package com.niki.eorder.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.niki.eorder.R;
 import com.niki.eorder.Utility;
 import com.niki.eorder.model.Cart;
@@ -39,9 +42,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final MenuViewHolder menuViewHolder, final int i) {
-
         menuViewHolder.tvName.setText(menuList.get(i).getName());
         menuViewHolder.tvPrice.setText(util.toIDR(menuList.get(i).getPrice()));
+        if (menuList.get(i).getImage() != ""){
+            Glide.with(context).load(menuList.get(i).getImage()).into(menuViewHolder.imageView);
+        }
         menuViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +75,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     }
 
-
     public ArrayList<Cart> getCartItem(){
         return cartList;
     }
@@ -83,6 +87,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public class MenuViewHolder extends RecyclerView.ViewHolder{
         private TextView tvName, tvPrice;
         private CardView cardView;
+        private ImageView imageView;
         private boolean hasOrder = false;
 
         public MenuViewHolder(@NonNull View itemView) {
@@ -90,7 +95,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             tvName = itemView.findViewById(R.id.tv_menu_name);
             tvPrice = itemView.findViewById(R.id.tv_menu_price);
             cardView = itemView.findViewById(R.id.cv_menu_card);
-
+            imageView = itemView.findViewById(R.id.iv_menu_img);
             cartList = new ArrayList<>();
         }
     }

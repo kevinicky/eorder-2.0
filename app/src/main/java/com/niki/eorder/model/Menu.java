@@ -4,6 +4,15 @@ public class Menu {
     private String ID;
     private String name;
     private int price;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getID() {
         return ID;
