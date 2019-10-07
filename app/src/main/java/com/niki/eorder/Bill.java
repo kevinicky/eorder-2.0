@@ -31,7 +31,7 @@ public class Bill extends AppCompatActivity {
         actionBar.setTitle("Bill");
 
 
-        TextView locationName, standName, date, totalPrice, seatNumber;
+        TextView locationName, standName, date, totalPrice, seatNumber, paymentMethod;
         DataPassing dataPassing = DataPassing.getInstance();
         History history = dataPassing.getHistory();
         BillListAdapter adapter;
@@ -60,12 +60,14 @@ public class Bill extends AppCompatActivity {
         date = findViewById(R.id.bill_time);
         totalPrice = findViewById(R.id.bill_total_price);
         seatNumber = findViewById(R.id.bill_seat_number);
+        paymentMethod = findViewById(R.id.bill_payment_method);
 
         locationName.setText(util.capitalizeString(history.getLocationID().replaceAll("_", " ")));
         standName.setText(util.capitalizeString(history.getStandID()));
         date.setText(history.getDate());
         totalPrice.setText("" + util.toIDR(history.getTotalPrice()));
         seatNumber.setText("Seat number : " + history.getSeatNumber());
+        paymentMethod.setText(history.getPaymentMethod());
 
         Log.d("LOGGER", "" + history.getSeatNumber());
     }

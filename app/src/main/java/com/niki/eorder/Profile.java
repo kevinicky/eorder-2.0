@@ -22,11 +22,10 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 public class Profile extends AppCompatActivity {
-    private TextView tvName, tvEmail, tveBalance;
+    private TextView tvName, tvEmail;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String name, email;
-    private long eBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class Profile extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser() != null){
             tvName = findViewById(R.id.tv_profile_name);
             tvEmail = findViewById(R.id.tv_profile_email);
-            tveBalance = findViewById(R.id.tv_profile_eBalance);
 
             DocumentReference ref = db.collection("users").document(firebaseAuth.getUid());
 
@@ -53,24 +51,13 @@ public class Profile extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Log.d("LOGGER", "name " + documentSnapshot.getString("name"));
                     Log.d("LOGGER", "email " + documentSnapshot.getString("email"));
-                    Log.d("LOGGER", "eBalance " + documentSnapshot.getLong("eBalance"));
 
                     name = documentSnapshot.getString("name");
                     email = documentSnapshot.getString("email");
-                    eBalance = documentSnapshot.getLong("eBalance");
 
-                    // set eBalance to IDR format
-                    DecimalFormat indonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-                    DecimalFormatSymbols rupiah = new DecimalFormatSymbols();
-
-                    rupiah.setCurrencySymbol("IDR ");
-                    rupiah.setGroupingSeparator('.');
-                    indonesia.setMinimumFractionDigits(0);
-                    indonesia.setDecimalFormatSymbols(rupiah);
 
                     tvEmail.setText(email);
                     tvName.setText(name);
-                    tveBalance.setText("" +  indonesia.format(eBalance));
 
                 }
             }).addOnFailureListener(new OnFailureListener() {

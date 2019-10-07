@@ -12,7 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Payment extends AppCompatActivity {
-    TextView tvPrice, tvTimer;
+    TextView tvPrice, tvTimer, tvPayment;
     private long timeLeftMilliseconds = 1050000;
     private Utility util = new Utility();
 
@@ -26,9 +26,12 @@ public class Payment extends AppCompatActivity {
 
         tvPrice = findViewById(R.id.tv_payment_price);
         tvTimer = findViewById(R.id.tv_payment_timer);
+        tvPayment = findViewById(R.id.tv_payment_method);
 
         Intent intent = getIntent();
-        final int price = intent.getIntExtra("paymentPrice", 0);
+        final long price = intent.getLongExtra("paymentPrice", 0);
+        final String paymentMethod = intent.getStringExtra("paymentMethod");
+        tvPayment.setText("Payment using " + paymentMethod);
 
         tvPrice.setText(util.toIDR(price));
 
@@ -39,6 +42,7 @@ public class Payment extends AppCompatActivity {
                 countDownTimer.cancel();
                 Intent intent = new Intent(Payment.this, PaymentReceipt.class);
                 intent.putExtra("paymentPrice", price);
+                intent.putExtra("paymentMethod", paymentMethod);
                 startActivity(intent);
                 finish();
             }

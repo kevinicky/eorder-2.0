@@ -44,7 +44,8 @@ public class PaymentReceipt extends AppCompatActivity {
         actionBar.setTitle("Payment Receipt");
 
         final Intent intent = getIntent();
-        final long price = intent.getIntExtra("paymentPrice", 0);
+        final long price = intent.getLongExtra("paymentPrice", 0);
+        final String paymentMethod = intent.getStringExtra("paymentMethod");
 
         carts = dataPassing.getCarts();
 
@@ -66,6 +67,7 @@ public class PaymentReceipt extends AppCompatActivity {
         data.put("seatNumber", dataPassing.getSeatNumber());
         data.put("reservationID", reservationID);
         data.put("locationID", dataPassing.getLocation());
+        data.put("paymentMethod", paymentMethod);
 
         DocumentReference ref = db.collection("history").document();
         ref.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -84,14 +86,25 @@ public class PaymentReceipt extends AppCompatActivity {
         });
 
         final DocumentReference ref1 = db.collection("users").document(firebaseAuth.getUid());
-        ref1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Long eBalance = documentSnapshot.getLong("eBalance");
+        if (paymentMethod.equals("GOPAY")){
+            ref1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Long gopay = documentSnapshot.getLong("gopay");
+                    ref1.update("gopay", gopay - price);
+                }
+            });
+        }
+        else if (paymentMethod.equals("ovo")){
+            ref1.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Long ovo = documentSnapshot.getLong("ovo");
+                    ref1.update("ovo", ovo - price);
+                }
+            });
+        }
 
-                ref1.update("eBalance", eBalance - price);
-            }
-        });
 
         tvReservationID = findViewById(R.id.tv_reservation_id);
         tvSeatNumber = findViewById(R.id.tv_seat_number);

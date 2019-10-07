@@ -32,7 +32,7 @@ public class OrderList extends AppCompatActivity {
     private TextView tvTotal, tvTax, tvFee, tvGrandTotal;
     Button btnOrder, btnCancel;
     private OrderAdapter adapter;
-    int total = 0, fee = 100, tax = 0, grandTotal;
+    long total = 0, fee = 100, tax = 0, grandTotal;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private boolean canPay = true;
@@ -89,42 +89,9 @@ public class OrderList extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        long eBalance = documentSnapshot.getLong("eBalance");
-                        canPay = true;
-                        Log.d("LOGGER" , "eBalance in order : " + eBalance);
-                        Log.d("LOGGER","remaining eBalance in order : " + (eBalance - grandTotal));
-
-                        if (eBalance - grandTotal < 0){
-                            canPay = false;
-                        }
-                        Log.d("LOGGER", "Can pay status : " + canPay);
-
-                        if (canPay){
-                            Intent intent = new Intent(OrderList.this, Payment.class);
-                            intent.putExtra("paymentPrice", grandTotal);
-                            dataPassing.setCarts(cartList);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            Toast.makeText(OrderList.this, "Sorry, your eBalance is not enough to process payment", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error getting data, please try again", Toast.LENGTH_SHORT).show();
-                        firebaseAuth.signOut();
-                        Intent intent = new Intent(getApplicationContext(), Home.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+                Intent intent = new Intent(OrderList.this, PaymentMethod.class);
+                intent.putExtra("grandTotal", grandTotal);
+                startActivity(intent);
             }
         });
 

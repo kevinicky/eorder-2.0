@@ -44,7 +44,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
         holder.tvDate.setText(histories.get(position).getDate());
         holder.tvPrice.setText(util.toIDR(histories.get(position).getTotalPrice()));
-
+        holder.tvPaymentMethod.setText(histories.get(position).getPaymentMethod());
         String locationID = histories.get(position).getLocationID();
         String temp = locationID.replaceAll("_", " ");
         temp = util.capitalizeString(temp);
@@ -72,7 +72,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvLocation, tvPrice, tvDate, tvSeatNumber;
+        private TextView tvLocation, tvPrice, tvDate, tvSeatNumber, tvPaymentMethod;
         private CardView cvHistory;
 
         public HistoryViewHolder(View itemView) {
@@ -83,6 +83,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             tvLocation = itemView.findViewById(R.id.tv_history_location);
             tvPrice = itemView.findViewById(R.id.tv_history_total);
             tvSeatNumber = itemView.findViewById(R.id.tv_history_seat_number);
+            tvPaymentMethod = itemView.findViewById(R.id.tv_payment_method_history);
         }
     }
 }

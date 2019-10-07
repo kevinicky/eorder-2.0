@@ -9,7 +9,16 @@ public class History {
     private String locationID, standID, date;
     private Timestamp dateAndTime;
     private int seatNumber;
+    private String paymentMethod;
     private long totalPrice, reservationID;
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     private Map<String, Integer> menuOrdered = new HashMap<>();
     private Map<String, Integer> price = new HashMap<>();
