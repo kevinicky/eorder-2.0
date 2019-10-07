@@ -63,7 +63,7 @@
                     android:layout_gravity="center"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@color/colorAccent"/>
+                    android:background="@color/colorWhite"/>
                 <ImageView
                     android:layout_marginLeft="16dp"
                     android:id="@+id/iv_cancel_order"
