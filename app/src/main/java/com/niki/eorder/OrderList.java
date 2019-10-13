@@ -41,7 +41,8 @@ public class OrderList extends AppCompatActivity {
         setContentView(R.layout.activity_order_list);
 
         final Bundle bundle = getIntent().getExtras();
-        cartList = (ArrayList<Cart>) bundle.getSerializable("dataCart");
+
+        if (bundle != null) cartList = (ArrayList<Cart>) bundle.getSerializable("dataCart");
 
         recyclerView = findViewById(R.id.rv_order_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
