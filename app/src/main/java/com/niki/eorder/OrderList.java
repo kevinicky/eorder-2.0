@@ -10,18 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.niki.eorder.adapter.OrderAdapter;
 import com.niki.eorder.model.Cart;
 
@@ -33,9 +26,6 @@ public class OrderList extends AppCompatActivity {
     Button btnOrder, btnCancel;
     private OrderAdapter adapter;
     long total = 0, fee = 100, tax = 0, grandTotal;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private boolean canPay = true;
     private ArrayList<Cart> cartList;
     private DataPassing dataPassing = DataPassing.getInstance();
 
@@ -49,8 +39,6 @@ public class OrderList extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
-
-        final DocumentReference ref = db.collection("users").document(firebaseAuth.getUid());
 
         final Bundle bundle = getIntent().getExtras();
         cartList = (ArrayList<Cart>) bundle.getSerializable("dataCart");
@@ -89,6 +77,7 @@ public class OrderList extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dataPassing.setCarts(cartList);
                 Intent intent = new Intent(OrderList.this, PaymentMethod.class);
                 intent.putExtra("grandTotal", grandTotal);
                 startActivity(intent);
