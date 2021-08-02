@@ -1,5 +1,5 @@
 package com.niki.eorder;
-
+// this is some text
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
