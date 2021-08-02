@@ -2,7 +2,6 @@ package com.niki.eorder;
 // this is some text
 // this is some text 2
 // this is some text 3
-// this is some text 4
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
