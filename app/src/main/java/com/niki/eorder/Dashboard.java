@@ -1,6 +1,5 @@
 package com.niki.eorder;
 // test commend
-// test edit 1 juga
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
